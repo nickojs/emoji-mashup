@@ -15,7 +15,7 @@ export const EmojiList = styled.ul`
   flex-flow: row wrap;
   justify-content: center;
   box-sizing: border-box;
-  
+
   ${({ length }) => (length > 4 ? regularList : smallList)};
 
   width: 80%; 
@@ -32,6 +32,7 @@ export const EmojiWrapper = styled.div`
   width: 120px;
   
   background: gray;
+  ${({ selected }) => (selected ? 'background: gold;' : null)}
 
   :hover{ background: gold; }
 `;
@@ -40,4 +41,16 @@ export const EmojiImg = styled.img`
   display: block;
   margin: 0 auto;
   max-width: 100%; 
+`;
+
+export const ListWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Selection = styled.div`
+  flex-grow: 1;
+  background: #CCC;
 `;
