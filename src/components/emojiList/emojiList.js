@@ -7,7 +7,11 @@ const EmojiList = ({ bodypart, assets, setFinalEmoji }) => {
   const [emojiPart, setEmojiPart] = useState(null);
 
   const emojiPartHandler = (value) => {
-    setFinalEmoji(emojiPart === value ? null : value);
+    const final = {
+      id: value,
+      url: assets[value]
+    };
+    setFinalEmoji(emojiPart === value ? null : final);
     setEmojiPart((pState) => (pState === value ? null : value));
   };
 
