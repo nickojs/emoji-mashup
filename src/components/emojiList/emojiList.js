@@ -1,4 +1,5 @@
 import React from 'react';
+import * as S from './styles';
 
 const EmojiList = ({ bodypart, assets }) => {
   const keyAssets = Object.keys(assets);
@@ -6,15 +7,16 @@ const EmojiList = ({ bodypart, assets }) => {
   return (
     <div>
       <h1>Body part: {bodypart}</h1>
-      <ul>
+      <S.EmojiList length={keyAssets.length}>
         {keyAssets.map((each) => (
-          <img
-            key={each}
-            src={assets[each]}
-            alt={bodypart}
-          />
+          <S.EmojiWrapper key={each}>
+            <S.EmojiImg
+              src={assets[each]}
+              alt={bodypart}
+            />
+          </S.EmojiWrapper>
         ))}
-      </ul>
+      </S.EmojiList>
     </div>
   );
 };
