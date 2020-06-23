@@ -1,15 +1,20 @@
 import React from 'react';
 import EmojiList from '../../components/emojiList/emojiList';
+import assets from '../../assets/mappedEmojiAssets.json';
 
-const EmojiBuilder = (props) => {
-  let a;
+const EmojiBuilder = () => {
+  const types = Object.keys(assets);
+
   return (
     <div>
       <h1>Emoji builder haha</h1>
-      <EmojiList />
-      <EmojiList />
-      <EmojiList />
-      <EmojiList />
+      {types.map((type) => (
+        <EmojiList
+          key={type}
+          bodypart={type}
+          assets={assets[type]}
+        />
+      ))}
     </div>
   );
 };

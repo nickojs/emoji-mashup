@@ -1,21 +1,19 @@
 import React from 'react';
 
-const EmojiList = (props) => {
-  let a;
+const EmojiList = ({ bodypart, assets }) => {
+  const keyAssets = Object.keys(assets);
 
   return (
     <div>
-      <h1>Body part</h1>
+      <h1>Body part: {bodypart}</h1>
       <ul>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
-        <li>img</li>
+        {keyAssets.map((each) => (
+          <img
+            key={each}
+            src={assets[each]}
+            alt={bodypart}
+          />
+        ))}
       </ul>
     </div>
   );
