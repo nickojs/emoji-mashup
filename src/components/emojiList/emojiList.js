@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './styles';
+import Emoji from './emoji';
 
 const EmojiList = ({ bodypart, assets }) => {
   const keyAssets = Object.keys(assets);
@@ -15,22 +16,24 @@ const EmojiList = ({ bodypart, assets }) => {
         <h1>Body part: {bodypart}</h1>
         <S.EmojiList length={keyAssets.length}>
           {keyAssets.map((each) => (
-            <S.EmojiWrapper
+            <Emoji
               key={each}
               selected={each === emojiPart}
-              onClick={() => emojiPartHandler(each)}
-            >
-              <S.EmojiImg
-                src={assets[each]}
-                alt={bodypart}
-              />
-            </S.EmojiWrapper>
+              clicked={() => emojiPartHandler(each)}
+              image={assets[each]}
+              alt={bodypart}
+            />
           ))}
         </S.EmojiList>
       </div>
       <S.Selection>
         <h2>Selection:</h2>
-        {emojiPart || <p>None...</p>}
+        {emojiPart ? (
+          <Emoji
+            image={assets[emojiPart]}
+            alt={bodypart}
+          />
+        ) : <p>None...</p>}
       </S.Selection>
     </S.ListWrapper>
   );
