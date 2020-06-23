@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import * as S from './styles';
 import Emoji from './emoji';
 
-const EmojiList = ({ bodypart, assets }) => {
+const EmojiList = ({ bodypart, assets, setFinalEmoji }) => {
   const keyAssets = Object.keys(assets);
   const [emojiPart, setEmojiPart] = useState(null);
 
   const emojiPartHandler = (value) => {
-    setEmojiPart((prevState) => (prevState === value ? null : value));
+    setFinalEmoji(emojiPart === value ? null : value);
+    setEmojiPart((pState) => (pState === value ? null : value));
   };
 
   return (
