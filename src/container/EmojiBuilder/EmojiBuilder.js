@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import EmojiList from '../../components/emojiList/emojiList';
 import assets from '../../assets/mappedEmojiAssets.json';
+import Preview from '../../components/preview/preview';
 
 const initialState = {
   body: null,
@@ -43,6 +44,7 @@ const EmojiBuilder = () => {
           setFinalEmoji={(value) => dispatch({ type: type.toUpperCase(), value })}
         />
       ))}
+      <Preview emoji={state} assets={assets} />
     </div>
   );
 };
