@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const EmojiList = styled.ul`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: center;
   box-sizing: border-box;
   
-  overflow-y: scroll;
-  padding: 8px;
+  overflow-y: auto;
+  padding-top: 10px;
   max-height: 400px;
   max-width: 900px;
 `;
@@ -16,7 +16,7 @@ export const EmojiWrapper = styled.div`
   cursor: pointer;
   box-sizing: border-box;
 
-  padding: 6px; margin: 6px;
+  padding: 6px; margin: 2px;
   width: 120px;
   
   background: gray;
