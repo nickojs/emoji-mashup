@@ -1,11 +1,12 @@
 import React from 'react';
 import Emoji from './emoji';
+import * as S from './styles';
 
 const EmojiList = ({ list }) => {
   const listKeys = Object.keys(list);
 
   return (
-    <ul>
+    <S.EmojiList>
       {listKeys.map((key) => (
         <li>
           <Emoji
@@ -14,7 +15,7 @@ const EmojiList = ({ list }) => {
           />
         </li>
       ))}
-    </ul>
+    </S.EmojiList>
   );
 };
 
