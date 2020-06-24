@@ -31,12 +31,11 @@ const emojiReducer = (state, action) => {
 
 const EmojiBuilder = () => {
   const [state, dispatch] = useReducer(emojiReducer, initialState);
-  const types = Object.keys(assets);
 
   return (
     <div>
       <Preview emoji={state} assets={assets} />
-      <Bodylist types={types} />
+      <Bodylist assets={assets} />
     </div>
   );
 };
