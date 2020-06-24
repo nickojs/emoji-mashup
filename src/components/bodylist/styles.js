@@ -1,4 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const currentItem = css`
+  color: lightcoral; 
+  background: white;
+  border-bottom: 5px solid gold;
+  border-top: 5px solid gold;
+`;
 
 export const BodyPartList = styled.ul`
   position: relative;
@@ -22,4 +29,5 @@ export const BodyPart = styled.li`
     color: lightcoral;
     background: white;
   }
+  ${({ selected }) => (selected ? currentItem : null)}
 `;

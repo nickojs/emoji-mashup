@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const currentItem = css`
+  background: gold;
+`;
 
 export const EmojiList = styled.ul`
   display: flex;
@@ -20,7 +24,7 @@ export const EmojiWrapper = styled.div`
   width: 120px;
   
   background: gray;
-  ${({ selected }) => (selected ? 'background: gold;' : null)}
+  ${({ selected }) => (selected ? currentItem : null)}
 
   :hover{ background: gold; }
 `;
