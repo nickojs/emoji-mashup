@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import * as S from './styles';
 import EmojiList from '../emojiList/emojiList';
 
-const Bodylist = ({ assets }) => {
+const Bodylist = () => {
   const [selectedType, setSelectedType] = useState(null);
   const [emojiList, setEmojiList] = useState({});
+  const { assets } = useSelector((state) => state);
 
   const types = Object.keys(assets);
 
