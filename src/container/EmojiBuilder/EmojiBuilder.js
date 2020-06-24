@@ -33,7 +33,7 @@ const EmojiBuilder = () => {
   const [state, dispatch] = useReducer(emojiReducer, initialState);
 
   return (
-    <div>
+    <div style={{ maxWidth: '900px', margin: '0 auto' }}>
       <Preview emoji={state} assets={assets} />
       <Bodylist assets={assets} />
     </div>

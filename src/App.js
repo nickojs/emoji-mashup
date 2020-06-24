@@ -3,7 +3,7 @@ import EmojiBuilder from './container/EmojiBuilder/EmojiBuilder';
 
 function App() {
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <div>
       <EmojiBuilder />
     </div>
   );
