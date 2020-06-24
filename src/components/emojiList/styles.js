@@ -10,18 +10,36 @@ const regularList = css`
   height: 200px;
 `;
 
+export const ListWrapper = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+`;
+
 export const EmojiList = styled.ul`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   box-sizing: border-box;
 
-  ${({ length }) => (length > 4 ? regularList : smallList)};
-
-  width: 80%; 
   max-width: 750px;
   padding: 8px;
-  margin: 12px auto;
+
+  ${({ length }) => (length > 4 ? regularList : smallList)};
+`;
+
+export const BodyPartTitle = styled.h1`
+  padding: 12px;
+  
+  font-family: sans-serif;
+  font-weight: 700;
+
+  color: white;
+  box-shadow: 1px 1px 10px blue;
+  border-radius: 12px 0 12px 0;
+  background: darkblue;
 `;
 
 export const EmojiWrapper = styled.div`
@@ -43,14 +61,8 @@ export const EmojiImg = styled.img`
   max-width: 100%; 
 `;
 
-export const ListWrapper = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const Selection = styled.div`
-  flex-grow: 1;
   background: #CCC;
+  margin: 0 auto;
+  width: 150px;
 `;

@@ -18,7 +18,7 @@ const EmojiList = ({ bodypart, assets, setFinalEmoji }) => {
   return (
     <S.ListWrapper>
       <div>
-        <h1>Body part: {bodypart}</h1>
+        <S.BodyPartTitle>{bodypart.toUpperCase()}</S.BodyPartTitle>
         <S.EmojiList length={keyAssets.length}>
           {keyAssets.map((each) => (
             <Emoji
