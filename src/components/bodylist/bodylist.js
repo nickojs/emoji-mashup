@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from './styles';
+import EmojiList from '../emojiList/emojiList';
 
 const Bodylist = ({ assets }) => {
   const [selectedType, setSelectedType] = useState(null);
@@ -27,9 +28,7 @@ const Bodylist = ({ assets }) => {
           </S.BodyPart>
         ))}
       </S.BodyPartList>
-      <ul>
-        {emojiList && Object.keys(emojiList).map((each) => <li>{each}</li>)}
-      </ul>
+      <EmojiList list={emojiList} />
     </>
   );
 };
