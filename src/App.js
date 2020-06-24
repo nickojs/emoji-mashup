@@ -3,8 +3,7 @@ import EmojiBuilder from './container/EmojiBuilder/EmojiBuilder';
 
 function App() {
   return (
-    <div>
-      <h1> Miss me yet ? </h1>
+    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
       <EmojiBuilder />
     </div>
   );

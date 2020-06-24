@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
-import EmojiList from '../../components/emojiList/emojiList';
 import assets from '../../assets/mappedEmojiAssets.json';
 import Preview from '../../components/preview/preview';
+import Bodylist from '../../components/bodylist/bodylist';
 
 const initialState = {
   body: null,
@@ -30,21 +30,13 @@ const emojiReducer = (state, action) => {
 };
 
 const EmojiBuilder = () => {
-  const types = Object.keys(assets);
   const [state, dispatch] = useReducer(emojiReducer, initialState);
+  const types = Object.keys(assets);
 
   return (
     <div>
-      <h1>Emoji builder haha</h1>
-      {types.map((type) => (
-        <EmojiList
-          key={type}
-          bodypart={type}
-          assets={assets[type]}
-          setFinalEmoji={(value) => dispatch({ type: type.toUpperCase(), value })}
-        />
-      ))}
       <Preview emoji={state} assets={assets} />
+      <Bodylist types={types} />
     </div>
   );
 };
