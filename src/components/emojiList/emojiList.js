@@ -10,13 +10,14 @@ const EmojiList = ({ type }) => {
   const emojiHandler = (value) => {
     setSelectedEmoji((pState) => (pState === value ? null : value));
   };
-
+  // useeffect to fetch the emoji object and check if current "type" has something,
+  // if it has, put on selectedEmoji
   const list = assets[type];
   const emojiList = assets[type] && Object.keys(list).map((key) => (
-    <li>
+    <li key={key}>
       <Emoji
         selected={selectedEmoji === key}
-        onClick={() => emojiHandler(key)}
+        clicked={() => emojiHandler(key)}
         image={list[key]}
         alt={key}
       />
