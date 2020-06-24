@@ -1,12 +1,15 @@
 import * as actionTypes from './actionTypes';
+import assets from '../assets/mappedEmojiAssets.json';
 
 const initialState = {
-  assets: null,
-  body: null,
-  effects: null,
-  eyes: null,
-  mouth: null,
-  nose: null
+  assets,
+  emoji: {
+    body: null,
+    effects: null,
+    eyes: null,
+    mouth: null,
+    nose: null
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.EYES: return { ...state, eyes: action.value };
     case actionTypes.MOUTH: return { ...state, mouth: action.value };
     case actionTypes.NOSE: return { ...state, nose: action.value };
-    default: break;
+    default: return { ...state };
   }
 };
 
