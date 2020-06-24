@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import Emoji from './emoji';
+import Selection from './selection';
 
 const EmojiList = ({ bodypart, assets, setFinalEmoji }) => {
   const keyAssets = Object.keys(assets);
@@ -31,15 +32,14 @@ const EmojiList = ({ bodypart, assets, setFinalEmoji }) => {
           ))}
         </S.EmojiList>
       </div>
-      <S.Selection>
-        <h2>Selection:</h2>
+      <Selection>
         {emojiPart ? (
           <Emoji
             image={assets[emojiPart]}
             alt={bodypart}
           />
         ) : <p>None...</p>}
-      </S.Selection>
+      </Selection>
     </S.ListWrapper>
   );
 };
