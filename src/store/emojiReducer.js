@@ -15,11 +15,11 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ASSETS: return { ...state, assets: action.value };
-    case actionTypes.BODY: return { ...state, body: action.value };
-    case actionTypes.EFFECTS: return { ...state, effects: action.value };
-    case actionTypes.EYES: return { ...state, eyes: action.value };
-    case actionTypes.MOUTH: return { ...state, mouth: action.value };
-    case actionTypes.NOSE: return { ...state, nose: action.value };
+    case actionTypes.BODY: return { ...state, emoji: { ...state.emoji, body: action.value } };
+    case actionTypes.EFFECTS: return { ...state, emoji: { ...state.emoji, effects: action.value } };
+    case actionTypes.EYES: return { ...state, emoji: { ...state.emoji, eyes: action.value } };
+    case actionTypes.MOUTH: return { ...state, emoji: { ...state.emoji, mouth: action.value } };
+    case actionTypes.NOSE: return { ...state, emoji: { ...state.emoji, nose: action.value } };
     default: return { ...state };
   }
 };
