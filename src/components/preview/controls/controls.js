@@ -15,21 +15,36 @@ const Controls = ({ part, emoji }) => {
         size: inputs.size.value
       };
       setEmojiPos(object);
-    }, 500);
+    }, 10);
 
     return () => clearTimeout(timer);
   }, [inputs]);
 
   useEffect(() => {
-    const updatedEmoji = {
-      ...emoji[part],
-      position: {
-        ...emoji[part].position,
-        ...emojiPos
+    /* I KNOW THIS IS MESSY AF, but is the only way I got this effect
+       to run without entering an infinite loop. Hell, I'm even worried
+       that this comment will break something up */
+
+    if (!emoji[part]) return;
+
+    const timer = setTimeout(() => {
+      const emojiPosition = JSON.stringify(emoji[part].position); // starts {}
+      const currentPosition = JSON.stringify(emojiPos); // starts null
+
+      if (emojiPosition !== currentPosition) {
+        const updatedEmoji = {
+          ...emoji[part],
+          position: {
+            ...emoji[part].position,
+            ...emojiPos
+          }
+        };
+        dispatch({ type: part.toUpperCase(), value: updatedEmoji });
       }
-    };
-    dispatch({ type: part.toUpperCase(), value: updatedEmoji });
-  }, [dispatch, emojiPos]);
+    }, 15);
+
+    return () => clearTimeout(timer);
+  }, [dispatch, part, emojiPos, emoji]);
 
   const inputChangeHandler = (event, identifier) => {
     const currentForm = { ...inputs };
