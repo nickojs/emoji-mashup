@@ -20,14 +20,9 @@ const Controls = ({ part, emoji }) => {
   };
 
   useEffect(() => {
-    let timer;
     if (emojiPos) {
-      timer = setTimeout(() => {
-        dispatch({ type: part.toUpperCase(), value: emojiPos });
-      }, 50);
+      dispatch({ type: part.toUpperCase(), value: emojiPos });
     }
-
-    return () => clearTimeout(timer);
   }, [dispatch, emojiPos, part]);
 
   return (
@@ -39,7 +34,7 @@ const Controls = ({ part, emoji }) => {
           type="range"
           min="0"
           max="10"
-          step=".2"
+          step=".05"
           defaultValue="5"
           onChange={(e) => positionHandler(e)}
         />
@@ -50,7 +45,7 @@ const Controls = ({ part, emoji }) => {
           type="range"
           min="0"
           max="10"
-          step=".2"
+          step=".05"
           defaultValue="5"
           onChange={(e) => positionHandler(e)}
         />
@@ -61,7 +56,7 @@ const Controls = ({ part, emoji }) => {
           type="range"
           min="0"
           max="2"
-          step=".2"
+          step=".05"
           defaultValue="1"
           onChange={(e) => positionHandler(e)}
         />
