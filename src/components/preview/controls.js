@@ -24,7 +24,7 @@ const Controls = ({ part, emoji }) => {
     if (emojiPos) {
       timer = setTimeout(() => {
         dispatch({ type: part.toUpperCase(), value: emojiPos });
-      }, 200);
+      }, 50);
     }
 
     return () => clearTimeout(timer);
@@ -60,9 +60,9 @@ const Controls = ({ part, emoji }) => {
           name="size"
           type="range"
           min="0"
-          max="10"
+          max="2"
           step=".2"
-          defaultValue="5"
+          defaultValue="1"
           onChange={(e) => positionHandler(e)}
         />
       </label>
