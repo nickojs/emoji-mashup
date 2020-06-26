@@ -6,7 +6,6 @@ import Controls from './controls';
 const Preview = () => {
   const [controls, setControls] = useState([]);
   const { emoji } = useSelector((state) => state);
-  const emojiKeys = Object.keys(emoji);
 
   useEffect(() => {
     const keys = Object.keys(emoji);
@@ -14,22 +13,32 @@ const Preview = () => {
     setControls(availableControls);
   }, [emoji]);
 
+  let previewImgs = null;
+  let ctrls = null;
+
+  if (controls) {
+    previewImgs = controls.map((each) => emoji[each] && (
+      <img
+        key={each}
+        src={emoji[each].url}
+        alt={emoji[each].id}
+        position={emoji[each].position}
+      />
+    ));
+
+    ctrls = controls.map((each) => (
+      <Controls key={each} part={each} emoji={emoji} />
+    ));
+  }
+
   return (
     <>
       <S.PreviewArea>
-        {emojiKeys.map((each) => (
-          <img
-            key={each}
-            src={emoji[each]?.url}
-            alt={emoji[each]?.id}
-          />
-        ))}
+        {previewImgs}
       </S.PreviewArea>
       <div>
         <p>Adjust your emoji:</p>
-        {controls.map((each) => (
-          <Controls key={each} part={each} emoji={emoji} />
-        ))}
+        {ctrls}
       </div>
     </>
   );
