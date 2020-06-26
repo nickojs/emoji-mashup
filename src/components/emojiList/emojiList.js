@@ -15,8 +15,7 @@ const EmojiList = ({ type, list }) => {
     setSelectedEmoji((pState) => (pState === value ? null : value));
     const emojiValues = {
       id: value,
-      url: list[value],
-      position: { x: null, y: null }
+      url: list[value]
     };
     dispatch({
       type: type.toUpperCase(),

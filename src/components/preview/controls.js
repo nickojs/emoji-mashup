@@ -9,7 +9,13 @@ const Controls = ({ part, emoji }) => {
     const position = {
       [event.target.name]: event.target.value
     };
-    const currentEmoji = { ...emoji[part], position: { ...position } };
+    const currentEmoji = {
+      ...emoji[part],
+      position: {
+        ...emoji[part].position,
+        ...position
+      }
+    };
     setEmojiPos(currentEmoji);
   };
 
