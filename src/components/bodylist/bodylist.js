@@ -11,8 +11,7 @@ const Bodylist = () => {
     setSelectedType((pState) => (pState === value ? null : value));
   };
 
-  const types = Object.keys(assets);
-  const bodyparts = types && types.map((type) => (
+  const bodyparts = Object.keys(assets).map((type) => (
     <S.BodyPart
       key={type}
       selected={selectedType === type}
@@ -27,7 +26,10 @@ const Bodylist = () => {
       <S.BodyPartList>
         {bodyparts}
       </S.BodyPartList>
-      <EmojiList type={selectedType} />
+      <EmojiList
+        type={selectedType}
+        list={assets[selectedType]}
+      />
     </>
   );
 };

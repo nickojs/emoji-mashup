@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as S from './styles';
 import Emoji from './emoji';
 
-const EmojiList = ({ type }) => {
+const EmojiList = ({ type, list }) => {
   const [selectedEmoji, setSelectedEmoji] = useState(null);
-  const { assets, emoji } = useSelector((state) => state);
+  const { emoji } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const emojiHandler = (value) => {
     setSelectedEmoji((pState) => (pState === value ? null : value));
+    // maybe later export this dispatch into a useEffect
     dispatch({ type: type.toUpperCase(), value });
   };
 
@@ -18,17 +19,19 @@ const EmojiList = ({ type }) => {
     setSelectedEmoji(emoji[type]);
   }, [emoji, type]);
 
-  const list = assets[type];
-  const emojiList = assets[type] && Object.keys(list).map((key) => (
-    <li key={key}>
-      <Emoji
-        selected={selectedEmoji === key}
-        clicked={() => emojiHandler(key)}
-        image={list[key]}
-        alt={key}
-      />
-    </li>
-  ));
+  let emojiList = <p>No option selected...</p>;
+  if (list) {
+    emojiList = Object.keys(list).map((key) => (
+      <li key={key}>
+        <Emoji
+          selected={selectedEmoji === key}
+          clicked={() => emojiHandler(key)}
+          image={list[key]}
+          alt={key}
+        />
+      </li>
+    ));
+  }
 
   return (
     <S.EmojiList>
