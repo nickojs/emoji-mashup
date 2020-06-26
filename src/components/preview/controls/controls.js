@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import formConfig from './formConfig';
+import compareObj from '../../../helpers/compareObj';
 
 const Controls = ({ part, emoji }) => {
   const [emojiPos, setEmojiPos] = useState(null);
   const [inputs, setInputs] = useState(formConfig);
   const dispatch = useDispatch();
 
+  // watches changes on the input to register emojiPos(ition)
   useEffect(() => {
     const timer = setTimeout(() => {
       const object = {
@@ -28,10 +30,10 @@ const Controls = ({ part, emoji }) => {
     if (!emoji[part]) return;
 
     const timer = setTimeout(() => {
-      const emojiPosition = JSON.stringify(emoji[part].position); // starts {}
-      const currentPosition = JSON.stringify(emojiPos); // starts null
+      const checkEmojiEquality = compareObj(emoji[part].position, emojiPos);
 
-      if (emojiPosition !== currentPosition) {
+      // just dispatch new position if they are different
+      if (!checkEmojiEquality) {
         const updatedEmoji = {
           ...emoji[part],
           position: {
@@ -39,6 +41,7 @@ const Controls = ({ part, emoji }) => {
             ...emojiPos
           }
         };
+
         dispatch({ type: part.toUpperCase(), value: updatedEmoji });
       }
     }, 15);
@@ -55,9 +58,7 @@ const Controls = ({ part, emoji }) => {
     setInputs(currentForm);
   };
 
-  const resetFormHandler = () => {
-    setInputs(formConfig);
-  };
+  const resetFormHandler = () => { setInputs(formConfig); };
 
   const form = Object.keys(inputs).map((input) => (
     <label htmlFor={input} key={input}>{input}
