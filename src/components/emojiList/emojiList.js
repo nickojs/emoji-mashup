@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as S from './styles';
 import Emoji from './emoji';
@@ -12,9 +12,7 @@ const EmojiList = ({ type, list }) => {
     /* the current UI (selectedEmoji) and redux store values are being
        toggled if the user clicks on the same emoji part twice,
        removing its selection */
-
     setSelectedEmoji((pState) => (pState === value ? null : value));
-
     const emojiValues = {
       id: value,
       url: list[value],
@@ -27,6 +25,9 @@ const EmojiList = ({ type, list }) => {
         : emojiValues
     });
   };
+
+  // restore UI state from redux store
+  useEffect(() => { setSelectedEmoji(emoji[type]?.id); }, [type, emoji]);
 
   let emojiList = <p>No option selected...</p>;
   if (list) {
