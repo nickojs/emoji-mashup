@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import * as S from './styles';
 import Emoji from './emoji';
 
 const EmojiList = ({ type }) => {
   const [selectedEmoji, setSelectedEmoji] = useState(null);
-  const { assets } = useSelector((state) => state);
+  const { assets, emoji } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const emojiHandler = (value) => {
     setSelectedEmoji((pState) => (pState === value ? null : value));
+    dispatch({ type: type.toUpperCase(), value });
   };
-  // useeffect to fetch the emoji object and check if current "type" has something,
-  // if it has, put on selectedEmoji
+
+  // syncs selectedEmoji with store
+  useEffect(() => {
+    setSelectedEmoji(emoji[type]);
+  }, [emoji, type]);
+
   const list = assets[type];
   const emojiList = assets[type] && Object.keys(list).map((key) => (
     <li key={key}>
