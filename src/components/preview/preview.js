@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as S from './styles';
 
 const Preview = () => {
   const [controls, setControls] = useState([]);
   const { emoji } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const emojiKeys = Object.keys(emoji);
 
   useEffect(() => {
@@ -12,6 +14,12 @@ const Preview = () => {
     const availableControls = keys.filter((each) => emoji[each] !== null);
     setControls(availableControls);
   }, [emoji]);
+
+  const setEmojiPartPosition = (part, el) => {
+    const currentEmoji = emoji[part];
+    currentEmoji.position[el.target.name] = el.target.value;
+    dispatch({ type: part.toUpperCase(), value: currentEmoji });
+  };
 
   return (
     <>
@@ -30,13 +38,37 @@ const Preview = () => {
           <div key={each}>
             <p>{each}</p>
             <label htmlFor="xAxis">X axis
-              <input name="xAxis" type="range" min="0" max="10" defaultValue="5" step=".2" />
+              <input
+                name="xAxis"
+                type="range"
+                min="0"
+                max="10"
+                step=".2"
+                defaultValue="5"
+                onChange={(e) => setEmojiPartPosition(each, e)}
+              />
             </label>
             <label htmlFor="yAxis">Y axis
-              <input name="yAxis" type="range" min="0" max="10" defaultValue="5" step=".2" />
+              <input
+                name="yAxis"
+                type="range"
+                min="0"
+                max="10"
+                step=".2"
+                defaultValue="5"
+                onChange={(e) => setEmojiPartPosition(each, e)}
+              />
             </label>
             <label htmlFor="size">Scale
-              <input name="size" type="range" min="0" max="10" defaultValue="5" step=".2" />
+              <input
+                name="size"
+                type="range"
+                min="0"
+                max="10"
+                step=".2"
+                defaultValue="5"
+                onChange={(e) => setEmojiPartPosition(each, e)}
+              />
             </label>
           </div>
         ))}
