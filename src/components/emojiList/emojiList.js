@@ -11,12 +11,17 @@ const EmojiList = ({ type, list }) => {
   const emojiHandler = (value) => {
     setSelectedEmoji((pState) => (pState === value ? null : value));
     // maybe later export this dispatch into a useEffect
-    dispatch({ type: type.toUpperCase(), value });
+    const object = {
+      id: value,
+      url: list[value],
+      position: { x: null, y: null }
+    };
+    dispatch({ type: type.toUpperCase(), value: object });
   };
 
   // syncs selectedEmoji with store
   useEffect(() => {
-    setSelectedEmoji(emoji[type]);
+    setSelectedEmoji(emoji[type]?.id);
   }, [emoji, type]);
 
   let emojiList = <p>No option selected...</p>;
