@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import * as S from './styles';
-import Controls from './controls';
+import Controls from './controls/controls';
 
 const Preview = () => {
   const [controls, setControls] = useState([]);
