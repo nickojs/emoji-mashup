@@ -12,11 +12,11 @@ const Preview = () => {
 
   return (
     <S.PreviewArea>
-      {emojiKeys.map((each) => emoji[each] && (
+      {emojiKeys.map((each) => (
         <img
           key={each}
-          src={emoji[each].url}
-          alt={each}
+          src={emoji[each]?.url}
+          alt={emoji[each]?.id}
         />
       ))}
 
