@@ -18,11 +18,13 @@ const Preview = () => {
 
   if (controls) {
     previewImgs = controls.map((each) => emoji[each] && (
-      <img
+      <S.EmojiPart
         key={each}
         src={emoji[each].url}
         alt={emoji[each].id}
-        position={emoji[each].position}
+        xAxis={emoji[each].position?.xAxis ?? 5}
+        yAxis={emoji[each].position?.yAxis ?? 5}
+        size={emoji[each].position?.size ?? 1}
       />
     ));
 

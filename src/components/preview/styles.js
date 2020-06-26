@@ -9,10 +9,12 @@ export const PreviewArea = styled.div`
   background: #CCC;
   
   box-sizing: border-box;
+`;
 
-  img{
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%)
-  }
+export const EmojiPart = styled.img`
+  position: absolute;
+  top: ${({ yAxis }) => `${yAxis * 10}%`}; 
+  left: ${({ xAxis }) => `${xAxis * 10}%`};  
+  transform: translate(-50%, -50%) ${({ size }) => `scale(${size})`};
+
 `;
