@@ -34,15 +34,14 @@ const Preview = () => {
   }
 
   return (
-    <>
+    <S.PreviewContainer>
       <S.PreviewArea>
         {previewImgs}
       </S.PreviewArea>
-      <div>
-        <p>Adjust your emoji:</p>
+      <S.ControlsContainer>
         {ctrls}
-      </div>
-    </>
+      </S.ControlsContainer>
+    </S.PreviewContainer>
   );
 };
 

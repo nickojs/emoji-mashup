@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import * as S from '../styles';
+
 import formConfig from './formConfig';
 import compareObj from '../../../helpers/compareObj';
 
@@ -75,7 +77,7 @@ const Controls = ({ part, emoji }) => {
   ));
 
   return (
-    <div>
+    <S.InnerControls>
       <p>{part}</p>
       {form}
       <button
@@ -83,7 +85,7 @@ const Controls = ({ part, emoji }) => {
         onClick={resetFormHandler}
       > Clear
       </button>
-    </div>
+    </S.InnerControls>
   );
 };
 
