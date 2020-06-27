@@ -18,9 +18,12 @@ export const PreviewArea = styled.div`
   box-sizing: border-box;
 `;
 
-export const EmojiPart = styled.img`
+export const EmojiPart = styled.img.attrs((props) => ({
+  style: {
+    top: `${props.xAxis * 10}%`,
+    left: `${props.yAxis * 10}%`,
+    transform: `translate(-50%, -50%) scale(${props.size})`
+  }
+}))`
   position: absolute;
-  top: ${({ yAxis }) => `${yAxis * 10}%`}; 
-  left: ${({ xAxis }) => `${xAxis * 10}%`};  
-  transform: translate(-50%, -50%) ${({ size }) => `scale(${size})`};
 `;
