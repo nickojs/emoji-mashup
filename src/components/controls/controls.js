@@ -1,74 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import * as S from './styles';
+import { useSelector } from 'react-redux';
 
-import formConfig from './formConfig';
+import Input from './input';
 
-const Controls = ({ part }) => {
-  const [emojiPos, setEmojiPos] = useState(null);
-  const [inputs, setInputs] = useState(formConfig);
-  const dispatch = useDispatch();
+const Controls = () => {
+  const [availableInputs, setAvailableInputs] = useState([]);
+  const { emoji } = useSelector((state) => state);
 
-  // watches changes on the input to register emojiPos(ition)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const object = {
-        xAxis: inputs.xAxis.value,
-        yAxis: inputs.yAxis.value,
-        size: inputs.size.value
-      };
-      setEmojiPos(object);
-    }, 10);
+    const inputs = Object.keys(emoji).filter((em) => emoji[em] !== null);
+    setAvailableInputs(inputs);
+  }, [emoji]);
 
-    return () => clearTimeout(timer);
-  }, [inputs]);
-
-  // updates current emoji position
-  useEffect(() => {
-    dispatch({ type: 'POSITION', part, position: emojiPos });
-  }, [dispatch, part, emojiPos]);
-
-  const inputChangeHandler = (event, identifier) => {
-    const currentForm = { ...inputs };
-    const currentElement = { ...currentForm[identifier] };
-    currentElement.value = event.target.value;
-
-    currentForm[identifier] = { ...currentElement };
-    setInputs(currentForm);
-  };
-
-  const resetFormHandler = () => { setInputs(formConfig); };
-
-  const form = Object.keys(inputs).map((input) => (
-    <label htmlFor={input} key={input}>{input}
-      <input
-        name={input}
-        type={inputs[input].type}
-        min={inputs[input].min}
-        max={inputs[input].max}
-        step={inputs[input].step}
-        value={inputs[input].value}
-        onChange={(e) => inputChangeHandler(e, input)}
-      />
-    </label>
+  const inputs = availableInputs.map((each) => (
+    <Input
+      key={each}
+      part={each}
+      position={emoji[each]?.position || null}
+    />
   ));
 
-  useEffect(() => {
-    console.log('resetting controls...');
-    resetFormHandler();
-  }, []);
-
-  return (
-    <S.InnerControls>
-      <p>{part}</p>
-      {form}
-      <button
-        type="button"
-        onClick={resetFormHandler}
-      > Clear
-      </button>
-    </S.InnerControls>
-  );
+  return inputs;
 };
 
 export default Controls;
