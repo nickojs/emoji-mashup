@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import * as S from './styles';
-import Controls from './controls/controls';
-
 import compareArr from '../../helpers/compareArr';
 
 const Preview = () => {
-  const [controls, setControls] = useState([]);
+  const [emojiParts, setEmojiParts] = useState([]);
   const { emoji } = useSelector((state) => state);
 
   useEffect(() => {
     const keys = Object.keys(emoji);
-    const availableControls = keys.filter((each) => emoji[each] !== null);
-    const compareControls = compareArr(controls, availableControls);
+    const availableParts = keys.filter((each) => emoji[each] !== null);
+    const compareControls = compareArr(emojiParts, availableParts);
 
     // exits the effect if control didn't changed
     if (compareControls) return;
 
     // sets new controls
-    setControls(availableControls);
-  }, [controls, emoji]);
+    setEmojiParts(availableParts);
+  }, [emojiParts, emoji]);
 
   let previewImgs = null;
-  let ctrls = null;
 
-  if (controls.length > 0) {
-    previewImgs = controls.map((each) => emoji[each] && (
+  if (emojiParts.length > 0) {
+    previewImgs = emojiParts.map((each) => emoji[each] && (
       <S.EmojiPart
         key={each}
         src={emoji[each].url}
@@ -35,11 +32,6 @@ const Preview = () => {
         size={emoji[each].position?.size ?? 1}
       />
     ));
-    // console.log('rendering controls');
-
-    ctrls = controls.map((each) => (
-      <Controls key={each} part={each} />
-    ));
   }
 
   return (
@@ -47,9 +39,6 @@ const Preview = () => {
       <S.PreviewArea>
         {previewImgs}
       </S.PreviewArea>
-      <S.ControlsContainer>
-        {ctrls}
-      </S.ControlsContainer>
     </S.PreviewContainer>
   );
 };

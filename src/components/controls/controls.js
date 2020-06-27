@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import * as S from '../styles';
+import * as S from './styles';
 
 import formConfig from './formConfig';
 
@@ -52,6 +52,11 @@ const Controls = ({ part }) => {
       />
     </label>
   ));
+
+  useEffect(() => {
+    console.log('resetting controls...');
+    resetFormHandler();
+  }, []);
 
   return (
     <S.InnerControls>
