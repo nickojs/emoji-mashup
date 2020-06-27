@@ -4,3 +4,5 @@ export const EFFECTS = 'EFFECTS';
 export const EYES = 'EYES';
 export const MOUTH = 'MOUTH';
 export const NOSE = 'NOSE';
+
+export const POSITION = 'POSITION';

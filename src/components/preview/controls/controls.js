@@ -3,9 +3,8 @@ import { useDispatch } from 'react-redux';
 import * as S from '../styles';
 
 import formConfig from './formConfig';
-import compareObj from '../../../helpers/compareObj';
 
-const Controls = ({ part, emoji }) => {
+const Controls = ({ part }) => {
   const [emojiPos, setEmojiPos] = useState(null);
   const [inputs, setInputs] = useState(formConfig);
   const dispatch = useDispatch();
@@ -24,32 +23,10 @@ const Controls = ({ part, emoji }) => {
     return () => clearTimeout(timer);
   }, [inputs]);
 
+  // updates current emoji position
   useEffect(() => {
-    /* I KNOW THIS IS MESSY AF, but is the only way I got this effect
-       to run without entering an infinite loop. Hell, I'm even worried
-       that this comment will break something up */
-
-    if (!emoji[part]) return;
-
-    const timer = setTimeout(() => {
-      const checkEmojiEquality = compareObj(emoji[part].position, emojiPos);
-
-      // just dispatch new position if they are different
-      if (!checkEmojiEquality) {
-        const updatedEmoji = {
-          ...emoji[part],
-          position: {
-            ...emoji[part].position,
-            ...emojiPos
-          }
-        };
-
-        dispatch({ type: part.toUpperCase(), value: updatedEmoji });
-      }
-    }, 15);
-
-    return () => clearTimeout(timer);
-  }, [dispatch, part, emojiPos, emoji]);
+    dispatch({ type: 'POSITION', part, position: emojiPos });
+  }, [dispatch, part, emojiPos]);
 
   const inputChangeHandler = (event, identifier) => {
     const currentForm = { ...inputs };

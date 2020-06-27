@@ -20,6 +20,19 @@ const reducer = (state = initialState, action) => {
     case actionTypes.EYES: return { ...state, emoji: { ...state.emoji, eyes: action.value } };
     case actionTypes.MOUTH: return { ...state, emoji: { ...state.emoji, mouth: action.value } };
     case actionTypes.NOSE: return { ...state, emoji: { ...state.emoji, nose: action.value } };
+    case actionTypes.POSITION:
+      return {
+        ...state,
+        emoji: {
+          ...state.emoji,
+          [action.part]: {
+            ...state.emoji[action.part],
+            position: {
+              ...action.position
+            }
+          }
+        }
+      };
     default: return { ...state };
   }
 };
