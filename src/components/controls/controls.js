@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import Input from './input';
+import Input from './input/input';
 
 const Controls = () => {
   const [availableInputs, setAvailableInputs] = useState([]);

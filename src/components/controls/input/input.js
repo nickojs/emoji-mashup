@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import * as S from './styles';
-import formConfig from './formConfig';
+import formConfig from '../formConfig';
 
 const Input = ({ part, position }) => {
   const [emojiPos, setEmojiPos] = useState(null);
@@ -45,8 +45,8 @@ const Input = ({ part, position }) => {
   }, [position]);
 
   const form = Object.keys(inputs).map((input) => (
-    <label htmlFor={input} key={input}>{input}
-      <input
+    <S.Label htmlFor={input} key={input}>{input}
+      <S.InputRange
         name={input}
         type={inputs[input].type}
         min={inputs[input].min}
@@ -55,23 +55,25 @@ const Input = ({ part, position }) => {
         value={inputs[input].value}
         onChange={(e) => inputChangeHandler(e, input)}
       />
-    </label>
+    </S.Label>
   ));
 
   return (
     <S.InnerControls>
-      <p>{part}</p>
+      <S.PartTitle>{part}</S.PartTitle>
       {form}
-      <button
-        type="button"
-        onClick={resetFormHandler}
-      > Clear
-      </button>
-      <button
-        type="button"
-        onClick={() => dispatch({ type: part.toUpperCase(), value: null })}
-      > Remove
-      </button>
+      <S.ButtonsContainer>
+        <button
+          type="button"
+          onClick={resetFormHandler}
+        > Clear
+        </button>
+        <button
+          type="button"
+          onClick={() => dispatch({ type: part.toUpperCase(), value: null })}
+        > Remove
+        </button>
+      </S.ButtonsContainer>
     </S.InnerControls>
   );
 };
