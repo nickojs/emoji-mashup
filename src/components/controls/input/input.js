@@ -63,16 +63,20 @@ const Input = ({ part, position }) => {
       <S.PartTitle>{part}</S.PartTitle>
       {form}
       <S.ButtonsContainer>
-        <button
-          type="button"
-          onClick={resetFormHandler}
-        > Clear
-        </button>
-        <button
-          type="button"
-          onClick={() => dispatch({ type: part.toUpperCase(), value: null })}
-        > Remove
-        </button>
+        <S.ButtonWrapper>
+          <S.UndoButton
+            type="button"
+            onClick={resetFormHandler}
+          > Clear
+          </S.UndoButton>
+        </S.ButtonWrapper>
+        <S.ButtonWrapper>
+          <S.RemoveButton
+            type="button"
+            onClick={() => dispatch({ type: part.toUpperCase(), value: null })}
+          > Remove
+          </S.RemoveButton>
+        </S.ButtonWrapper>
       </S.ButtonsContainer>
     </S.InnerControls>
   );

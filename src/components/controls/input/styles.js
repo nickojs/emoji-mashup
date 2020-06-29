@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { ReactComponent as RemoveIcon } from '../../../assets/icons/trash.svg';
+import { ReactComponent as UndoIcon } from '../../../assets/icons/undo.svg';
 
 export const InnerControls = styled.div`
   display: flex;
@@ -14,29 +16,6 @@ export const InnerControls = styled.div`
   background: #CCC;
 
   * { max-width: 100% }
-`;
-export const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const PartTitle = styled.h1`
-  padding: 7px;
-
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  
-  color: white;
-  background: #EEE;
-`;
-
-export const Label = styled.label`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 12px; 
 `;
 
 export const InputRange = styled.input`
@@ -73,6 +52,54 @@ export const InputRange = styled.input`
 
     &:hover { background: #1abc9c; }
   }
+`;
 
+export const PartTitle = styled.h1`
+  padding: 7px;
 
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  
+  color: white;
+  background: #EEE;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 60px; height: 60px;
+  padding: 12px; margin: 12px;
+
+  box-sizing: border-box;
+  cursor: pointer;
+
+  background: gold;
+  border: 1px solid black;
+  border-radius: 12px;
+
+  :hover svg{ 
+    fill: lime;
+  }
+
+  svg{ 
+    width: 100%; height: 100%;
+    transition: fill .20s;
+  }
+`;
+
+export const RemoveButton = styled(RemoveIcon)` `;
+export const UndoButton = styled(UndoIcon)``;
+
+export const Label = styled.label`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px; 
 `;
