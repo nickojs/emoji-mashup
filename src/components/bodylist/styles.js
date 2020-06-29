@@ -11,7 +11,7 @@ export const BodyPartList = styled.ul`
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-x: auto;
   box-shadow: 0 16px 4px -2px rgba(0, 0, 0, 0.7);
 `;
