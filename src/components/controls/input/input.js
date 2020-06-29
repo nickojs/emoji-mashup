@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState, useEffect, useCallback } from 'react';
 import * as S from './styles';
-import formConfig from '../formConfig';
 
-const Input = ({ part, position }) => {
-  const [emojiPos, setEmojiPos] = useState(null);
+const Input = ({
+  formConfig, position, setEmojiPos, removeEmoji
+}) => {
   const [inputs, setInputs] = useState(formConfig);
-  const dispatch = useDispatch();
 
-  // form related functions
   const inputChangeHandler = (event, identifier) => {
     const currentForm = { ...inputs };
     const currentElement = { ...currentForm[identifier] };
@@ -18,41 +15,32 @@ const Input = ({ part, position }) => {
     currentForm[identifier] = { ...currentElement };
     setInputs(currentForm);
   };
-  const resetFormHandler = () => { setInputs(formConfig); };
+  const resetFormHandler = useCallback(() => { setInputs(formConfig); }, [formConfig]);
 
   // watches changes on the input to register emojiPos(ition)
   useEffect(() => {
     const timer = setTimeout(() => {
-      const object = {
+      const values = {
+        part: inputs.part,
         xAxis: inputs.xAxis.value,
         yAxis: inputs.yAxis.value,
         size: inputs.size.value
       };
-      setEmojiPos(object);
+      setEmojiPos(values);
+      console.log('setemojis');
     }, 10);
-
     return () => clearTimeout(timer);
-  }, [inputs]);
-
-  // updates current emoji position
-  useEffect(() => {
-    dispatch({ type: 'POSITION', part, position: emojiPos });
-  }, [dispatch, part, emojiPos]);
+  }, [setEmojiPos, inputs]);
 
   // resets the form on emoji change
   useEffect(() => {
     if (!position) { resetFormHandler(); }
-  }, [position]);
+  }, [resetFormHandler, position]);
 
-  const form = Object.keys(inputs).map((input) => (
+  const form = Object.keys(inputs).filter((key) => key !== 'part').map((input) => (
     <S.Label htmlFor={input} key={input}>{input}
       <S.InputRange
-        name={input}
-        type={inputs[input].type}
-        min={inputs[input].min}
-        max={inputs[input].max}
-        step={inputs[input].step}
-        value={inputs[input].value}
+        {...inputs[input]}
         onChange={(e) => inputChangeHandler(e, input)}
       />
     </S.Label>
@@ -60,7 +48,7 @@ const Input = ({ part, position }) => {
 
   return (
     <S.InnerControls>
-      <S.PartTitle>{part}</S.PartTitle>
+      <S.PartTitle>{inputs.part}</S.PartTitle>
       {form}
       <S.ButtonsContainer>
         <S.ButtonWrapper>
@@ -73,7 +61,7 @@ const Input = ({ part, position }) => {
         <S.ButtonWrapper>
           <S.RemoveButton
             type="button"
-            onClick={() => dispatch({ type: part.toUpperCase(), value: null })}
+            onClick={removeEmoji}
           > Remove
           </S.RemoveButton>
         </S.ButtonWrapper>

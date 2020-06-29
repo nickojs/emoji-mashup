@@ -1,4 +1,5 @@
-export default {
+export default (part) => ({
+  part,
   xAxis: {
     type: 'range',
     min: '0',
@@ -20,4 +21,4 @@ export default {
     step: '.01',
     value: '1'
   }
-};
+});
